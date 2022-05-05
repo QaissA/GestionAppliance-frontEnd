@@ -1,0 +1,42 @@
+<!-- <form>
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label">Libelle</label>
+      <input type="text" class="form-control" (input)="inputValueLibelle($any($event.target).value)" required>
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">DBID</label>
+        <input type="text" class="form-control" (input)="inputValueDbid($any($event.target).value)" required>
+    </div>
+    <div class="mb-3" style="margin-top: 20px;">
+        <label for="exampleInputPassword1" class="form-label">Disponibilité</label>
+        <input type="text" class="form-control" (input)="inputValuedispo($any($event.target).value)" required>
+        <div class="form-text">input takes only true or false values.</div>
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">References</label>
+        <input type="text" class="form-control" (input)="inputValueref($any($event.target).value)" required>
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">ApplianceType</label>
+        <input type="text" class="form-control" (input)="inputValueAppType($any($event.target).value)" required>
+    </div>
+    <button (click)="addAppliance()" class="btn btn-primary float-end">Submit</button>
+  </form> -->
+
+<form class="form">
+    <div class="mb-3">
+        <label for="applianceLibelle" class="form-label">Libelle</label>
+        <!-- <input type="text" class="form-control" name="appliance_Id" [(ngModel)]="applianceId" 
+            *ngIf="appliance.appliance_Id != 0" disabled> -->
+        <input type="text" class="form-control" name="applianceLibelle" [(ngModel)]="libelle">
+        <label for="applianceDbid" class="form-label">Dbid</label>
+        <input type="text" class="form-control" name="applianceDbid" [(ngModel)]="dbid">
+        <label for="applianceDisponibilite" class="form-label">Disponibilite</label>
+        <input type="text" class="form-control" [(ngModel)]="dispo" cla>
+        <label for="applianceReferances" class="form-label">Reference</label>
+        <input type="text" class="form-control" [(ngModel)]="ref">
+        <label for="applianceAppType" class="form-label">Appliance Type</label>
+        <input type="text" class="form-control" [(ngModel)]="appType">
+
+    </div>
+</form>

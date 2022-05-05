@@ -1,0 +1,133 @@
+<!-- Button trigger Add Appliance Form -->
+<button type="button" class="btn btn-outline-success float-end m-2 " data-bs-toggle="modal" data-bs-target="#staticBackdrop" 
+(click)="modalAdd()">
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-square-fill mb-1" viewBox="0 0 16 16" >
+    <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z"/>
+  </svg>
+</button>
+
+
+
+
+
+
+<!-- Button Show Appliance Types -->
+<button type="button" class="btn btn-outline-primary float-end m-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-dots-fill mb-2" viewBox="0 0 16 16">
+    <path d="M16 8c0 3.866-3.582 7-8 7a9.06 9.06 0 0 1-2.347-.306c-.584.296-1.925.864-4.181 1.234-.2.032-.352-.176-.273-.362.354-.836.674-1.95.77-2.966C.744 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7zM5 8a1 1 0 1 0-2 0 1 1 0 0 0 2 0zm4 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0zm3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+  </svg>
+</button>
+
+<br>
+
+<!--Alert pop off-->
+<div class="alert alert-success" role="alert" id="addApplianceSucces">
+  Appliance successfully added
+</div>
+<div class="alert alert-success" role="alert" id="updateApplianceSucces">
+  Appliance successfully updated
+</div>
+<div class="alert alert-success" role="alert" id="deleteApplianceSucces">
+  Appliance successfully deleted
+</div>
+<!--End of alert pop off-->
+
+
+<!--table component -->
+<table class="table table-striped">
+  <thead> 
+      <tr>
+          <th>Appliance_Id</th>
+          <th>Libelle</th>
+          <th>DBID</th>
+          <th>Disponibilité</th>
+          <th>References</th>
+          <th>ApplianceType</th>
+          <th>Options</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr *ngFor="let item of applianceList$|async">
+          <td>{{item.appliance_Id}}</td>
+          <td>{{item.libell}}</td>
+          <td>{{ item.dbid }}</td>
+          <td>{{ item.disponibilite }}</td>
+          <td>{{ item.references }}</td>
+          <!-- <td>{{ item.applianceType }}</td> -->
+          <td>{{ typeApplianceMap.get(item.applianceType) }}</td>
+          <td>
+            <button class="btn btn-outline-warning" (click)="modalUpdate(item)" data-bs-toggle="modal" data-bs-target="#staticBackdrop2">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square mb-1" viewBox="0 0 16 16">
+                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+              </svg>            
+            </button>
+            <button class="btn btn-outline-danger" (click)="delete(item)">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill mb-1" viewBox="0 0 16 16">
+                <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
+              </svg>            
+            </button>
+          </td>
+      </tr>
+  </tbody>
+</table>
+
+
+
+<!--end of table-->
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">types d'appliance</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p *ngFor="let type of typesApplianceList$|async">{{ type.typeApp_ID }} - {{type.libelle}}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+  
+  <!-- Modal Add appliance -->
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">{{modalTitle}}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id ="addModalClose" 
+          (click)="modalClose()"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <app-form-appliance [appliance]="appliance"  *ngIf="activeFormAppliance"></app-form-appliance>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+
+  <!--modal update appliance-->
+
+<div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel2">{{ modalTitle }}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="updateAppliance" (click)="modalClose()"
+        >
+      </button>
+      </div>
+      <div class="modal-body">
+        <app-form-appliance-update [appliance]="appliance" *ngIf="activeFormAppliance"></app-form-appliance-update>
+      </div>
+    </div>
+  </div>
+</div>
